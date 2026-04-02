@@ -2,6 +2,7 @@
 .home-hero {
     align-items: flex-end;
     padding-top: calc(120px + var(--space-6));
+    min-height: 700px;
 }
 
 .home-hero .hero-content {
