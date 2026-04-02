@@ -35,7 +35,7 @@ body {
     min-height: 700px;
     display: flex;
     align-items: flex-start;
-    padding: clamp(32px, 6vw, 64px) var(--page-padding);
+    padding: clamp(100px, 10vw, 140px) var(--page-padding) clamp(32px, 6vw, 64px);
     overflow: hidden;
 }
 

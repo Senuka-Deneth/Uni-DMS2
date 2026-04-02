@@ -5,17 +5,8 @@ include 'includes/header.php';
 <section class="page-hero reveal-on-scroll" aria-label="About hero">
     <div class="container hero-content">
         <p class="eyebrow">About Uni-DMS</p>
-        <h1>Crafting a guided path for Sri Lankan achievers.</h1>
-        <p class="page-hero-meta">We are researchers, counselors, and storytellers who turn the complexity of university admissions into calm, confident choices.</p>
-        <div class="hero-cta-group">
-            <a class="btn btn-primary" href="finder.php">Find My Degree</a>
-            <a class="btn btn-ghost" href="universities.php">Browse Universities</a>
-        </div>
-        <div class="breadcrumb">
-            <a href="index.php">Home</a>
-            <span>/</span>
-            <span>About</span>
-        </div>
+        <h1>Empowering Your Journey to Higher Education in Sri Lanka.</h1>
+        <p class="page-hero-meta">We simplify the path from A/L results to your dream career. Discover universities, find your degree, and unlock your future—all in one place.</p>
     </div>
 </section>
 <section class="section-shell">
