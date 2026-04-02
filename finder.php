@@ -33,11 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             WHERE 
             (
                 (z.subject1 = ? AND z.subject2 = ? AND z.subject3 = ?) OR 
-                (z.subject1 = ? AND z.subject3 = ? AND z.subject2 = ?) OR
-                (z.subject2 = ? AND z.subject1 = ? AND z.subject3 = ?) OR
-                (z.subject2 = ? AND z.subject3 = ? AND z.subject1 = ?) OR
-                (z.subject3 = ? AND z.subject1 = ? AND z.subject2 = ?) OR
-                (z.subject3 = ? AND z.subject2 = ? AND z.subject1 = ?)
+                (z.subject1 = ? AND z.subject2 = ? AND z.subject3 = ?) OR
+                (z.subject1 = ? AND z.subject2 = ? AND z.subject3 = ?) OR
+                (z.subject1 = ? AND z.subject2 = ? AND z.subject3 = ?) OR
+                (z.subject1 = ? AND z.subject2 = ? AND z.subject3 = ?) OR
+                (z.subject1 = ? AND z.subject2 = ? AND z.subject3 = ?)
             )
             AND (z.district = 'All' OR z.district = ?) 
             AND z.cutoff <= ? 
@@ -81,7 +81,7 @@ include "includes/header.php";
                 <p><?php echo htmlspecialchars($error); ?></p>
             </div>
         <?php endif; ?>
-        <form class="finder-stage reveal-on-scroll" method="POST" action="finder.php">
+        <form class="finder-stage reveal-on-scroll" method="POST" action="finder.php#results">
             <div class="finder-progress">
                 <?php
                 $progressConfig = [
@@ -140,10 +140,10 @@ include "includes/header.php";
             </div>
 
             <div class="slider-wrapper">
-                <label for="zscoreRange">Target Z-score</label>
+                <label for="zscoreRange">Your Z-Score</label>
                 <input type="range" class="range-slider" id="zscoreRange" min="0" max="4" step="0.001" value="<?php echo htmlspecialchars($sliderValueFormatted); ?>">
                 <div class="range-value">
-                    <span>Current target:</span>
+                    <span>Your Z-Score:</span>
                     <strong id="zscoreValue"><?php echo htmlspecialchars($sliderValueFormatted); ?></strong>
                 </div>
                 <input type="hidden" id="zscoreInput" name="zscore" value="<?php echo htmlspecialchars($sliderValueFormatted); ?>">
@@ -151,13 +151,13 @@ include "includes/header.php";
             
             <div class="finder-actions">
                 <button type="submit" class="btn btn-primary">Find Degrees</button>
-                <button type="button" class="btn btn-ghost" data-reset-slider>Reset score</button>
+                <button type="button" class="btn btn-ghost" onclick="resetFinderForm()">Reset</button>
             </div>
         </form>
     </div>
 </section>
 
-<section class="section-shell" aria-label="Finder results">
+<section class="section-shell" aria-label="Finder results" id="results">
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] === "POST"): ?>
             <div class="finder-results">
@@ -190,5 +190,26 @@ include "includes/header.php";
         <?php endif; ?>
     </div>
 </section>
+
+<script>
+function resetFinderForm() {
+    // Reset all select dropdowns
+    const selects = document.querySelectorAll('.finder-stage select');
+    selects.forEach(select => select.selectedIndex = 0);
+    
+    // Reset the slider and its displays to 0
+    const slider = document.getElementById('zscoreRange');
+    const zValueDisplay = document.getElementById('zscoreValue');
+    const zInput = document.getElementById('zscoreInput');
+    
+    if(slider) slider.value = '0';
+    if(zValueDisplay) zValueDisplay.textContent = '0.000';
+    if(zInput) zInput.value = '0.000';
+    
+    // Reset the hidden stream input if still present
+    const streamInput = document.getElementById('streamInput');
+    if (streamInput) streamInput.value = '';
+}
+</script>
 
 <?php include "includes/footer.php"; ?>
