@@ -1,0 +1,10 @@
+# Database Configuration
+includes/config.php
+.env
+
+# IDEs
+.idea/
+.vscode/
+
+# OS Specific
+.DS_Store

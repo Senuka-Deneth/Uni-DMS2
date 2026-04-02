@@ -1,0 +1,94 @@
+/* Layout primitives and section styles */
+body {
+    background: var(--light-50);
+    color: var(--text-on-light-primary);
+}
+
+.site-shell {
+    position: relative;
+    background: var(--light-50);
+    min-height: 100vh;
+}
+
+.site-main {
+    /* removed top padding to eliminate white blank space */
+}
+
+.container {
+    width: min(var(--page-max-width), 100% - 2 * var(--page-padding));
+    margin: 0 auto;
+    padding: 0;
+}
+
+.section-shell {
+    padding: var(--space-16) 0;
+}
+
+.section-shell:first-of-type {
+    padding-top: var(--space-20);
+}
+
+.page-hero {
+    position: relative;
+    background: var(--dark-900);
+    color: var(--text-on-dark-primary);
+    min-height: 700px;
+    display: flex;
+    align-items: flex-start;
+    padding: clamp(32px, 6vw, 64px) var(--page-padding);
+    overflow: hidden;
+}
+
+.page-hero .container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.page-hero h1 {
+    color: var(--text-on-dark-primary);
+}
+
+.breadcrumb {
+    display: flex;
+    gap: var(--space-1);
+    align-items: center;
+    font-size: var(--text-sm);
+    color: var(--text-on-light-muted);
+}
+
+.page-transition {
+    height: 120px;
+    background: linear-gradient(180deg, var(--dark-900), var(--light-50));
+}
+
+.hero-scroll {
+    position: absolute;
+    bottom: var(--space-6);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-on-dark-muted);
+    font-size: var(--text-sm);
+    cursor: pointer;
+}
+
+.hero-scroll svg {
+    width: 20px;
+    height: 20px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.hero-scroll span {
+    font-size: 1.25rem;
+}
+
+@media (max-width: var(--bp-md)) {
+    .page-hero {
+        min-height: auto;
+        padding-bottom: var(--space-10);
+    }
+}
