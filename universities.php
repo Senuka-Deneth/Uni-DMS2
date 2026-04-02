@@ -50,16 +50,16 @@ if ($stmt) {
 }
 
 foreach ($universities as &$university) {
-    $streamStmt = $conn->prepare(
-        'SELECT DISTINCT z.stream FROM faculties f JOIN departments d ON f.id = d.faculty_id JOIN degrees dd ON d.id = dd.department_id JOIN zscore_cutoffs z ON dd.id = z.degree_id WHERE f.university_id = ?'
-    );
+    $uniName = $university['name'];
+
+    $streamStmt = $conn->prepare('SELECT DISTINCT stream FROM university_degrees WHERE university = ?');
     $streams = [];
     if ($streamStmt) {
-        $streamStmt->bind_param('i', $university['id']);
+        $streamStmt->bind_param('s', $uniName);
         $streamStmt->execute();
         $streamResult = $streamStmt->get_result();
         while ($row = $streamResult->fetch_assoc()) {
-            if (!empty($row['stream'])) {
+            if (!empty($row['stream']) && $row['stream'] !== 'Other Programs') {
                 $streams[] = $row['stream'];
             }
         }
@@ -67,12 +67,10 @@ foreach ($universities as &$university) {
     }
     $university['stream_list'] = $streams ? implode(', ', $streams) : 'All';
 
-    $degreeCountStmt = $conn->prepare(
-        'SELECT COUNT(*) AS total FROM degrees d JOIN departments dep ON d.department_id = dep.id JOIN faculties f ON dep.faculty_id = f.id WHERE f.university_id = ?'
-    );
+    $degreeCountStmt = $conn->prepare('SELECT COUNT(*) AS total FROM university_degrees WHERE university = ?');
     $degreeCount = 0;
     if ($degreeCountStmt) {
-        $degreeCountStmt->bind_param('i', $university['id']);
+        $degreeCountStmt->bind_param('s', $uniName);
         $degreeCountStmt->execute();
         $degreeCountResult = $degreeCountStmt->get_result();
         $degreeCount = (int) ($degreeCountResult->fetch_assoc()['total'] ?? 0);

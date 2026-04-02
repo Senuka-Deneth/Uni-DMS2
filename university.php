@@ -8,6 +8,8 @@ $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $university = null;
 $degrees = [];
 
+$groupedDegrees = [];
+
 if ($id) {
     $stmt = $conn->prepare('SELECT * FROM universities WHERE id = ? LIMIT 1');
     if ($stmt) {
@@ -22,12 +24,60 @@ if ($id) {
 }
 
 if ($university) {
-    $degreeStmt = $conn->prepare('SELECT d.name AS degree_name, d.duration, d.medium, d.description, f.name AS faculty_name FROM degrees d JOIN departments dep ON d.department_id = dep.id JOIN faculties f ON dep.faculty_id = f.id WHERE f.university_id = ? ORDER BY d.name ASC');
+    $uniName = $university['name'];
+    $degreeStmt = $conn->prepare('
+        SELECT DISTINCT 
+            fz.degree_name, 
+            fz.subject1, 
+            fz.subject2, 
+            fz.subject3,
+            d.duration,
+            d.medium,
+            d.description,
+            fac.name AS faculty_name
+        FROM flat_zscores fz
+        LEFT JOIN degrees d ON d.name = fz.degree_name
+        LEFT JOIN departments dep ON d.department_id = dep.id
+        LEFT JOIN faculties fac ON dep.faculty_id = fac.id AND fac.university_id = ?
+        WHERE fz.university_name = ?
+        ORDER BY fz.degree_name ASC
+    ');
+
     if ($degreeStmt) {
-        $degreeStmt->bind_param('i', $id);
+        $degreeStmt->bind_param('is', $id, $uniName);
         $degreeStmt->execute();
         $degrees = $degreeStmt->get_result()->fetch_all(MYSQLI_ASSOC);
         $degreeStmt->close();
+
+        foreach ($degrees as $deg) {
+            $sub1 = strtoupper($deg['subject1'] ?? '');
+            $sub2 = strtoupper($deg['subject2'] ?? '');
+            $sub3 = strtoupper($deg['subject3'] ?? '');
+            $degUpper = strtoupper($deg['degree_name']);
+            $subs = $sub1 . " " . $sub2 . " " . $sub3;
+            
+            $stream = 'Other Programs';
+            if (strpos($subs, 'COMBINED MATHEMATICS') !== false) {
+                $stream = 'Maths';
+            } elseif (strpos($subs, 'BIOLOGY') !== false) {
+                $stream = 'Bio';
+            } elseif (strpos($subs, 'ACCOUNTING') !== false || strpos($subs, 'BUSINESS') !== false || strpos($subs, 'ECONOMICS') !== false || strpos($degUpper, 'MANAGEMENT') !== false || strpos($degUpper, 'COMMERCE') !== false) {
+                $stream = 'Commerce';
+            } elseif (strpos($subs, 'ANY') !== false || strpos($degUpper, 'ARTS') !== false || strpos($degUpper, 'LANGUAGES') !== false) {
+                $stream = 'Arts';
+            } else {
+                if (strpos($degUpper, 'MEDICINE') !== false || strpos($degUpper, 'DENTAL') !== false || strpos($degUpper, 'BIOLOGICAL') !== false) {
+                    $stream = 'Bio';
+                } elseif (strpos($degUpper, 'ENGINEERING') !== false || strpos($degUpper, 'PHYSICAL') !== false || strpos($degUpper, 'ICT') !== false || strpos($degUpper, 'COMPUTER') !== false) {
+                    $stream = 'Maths';
+                }
+            }
+            
+            if (!isset($groupedDegrees[$stream])) {
+                $groupedDegrees[$stream] = [];
+            }
+            $groupedDegrees[$stream][] = $deg;
+        }
     }
 }
 
@@ -73,18 +123,33 @@ include 'includes/header.php';
 
     <section class="container reveal-on-scroll">
         <h2>Featured degrees</h2>
-        <?php if ($degrees): ?>
-            <div class="finder-results">
-                <?php foreach ($degrees as $degree): ?>
-                    <article class="finder-card reveal-on-scroll">
-                        <h3><?php echo htmlspecialchars($degree['degree_name']); ?></h3>
-                        <p><strong>Faculty:</strong> <?php echo htmlspecialchars($degree['faculty_name']); ?></p>
-                        <p><strong>Duration:</strong> <?php echo htmlspecialchars($degree['duration']); ?></p>
-                        <p><strong>Medium:</strong> <?php echo htmlspecialchars($degree['medium']); ?></p>
-                        <p><?php echo htmlspecialchars($degree['description']); ?></p>
-                    </article>
-                <?php endforeach; ?>
-            </div>
+        <?php if (!empty($groupedDegrees)): ?>
+            <?php foreach ($groupedDegrees as $streamName => $streamDegrees): ?>
+                <div class="stream-group">
+                    <h3 class="stream-title" style="margin-top: 2rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem; display: inline-block;">
+                        <?php echo htmlspecialchars($streamName); ?>
+                    </h3>
+                    <div class="finder-results" style="margin-top: 1rem;">
+                        <?php foreach ($streamDegrees as $degree): ?>
+                            <article class="finder-card reveal-on-scroll">
+                                <h3><?php echo htmlspecialchars($degree['degree_name']); ?></h3>
+                                <?php if (!empty($degree['faculty_name'])): ?>
+                                    <p><strong>Faculty:</strong> <?php echo htmlspecialchars($degree['faculty_name']); ?></p>
+                                <?php endif; ?>
+                                <?php if (!empty($degree['duration'])): ?>
+                                    <p><strong>Duration:</strong> <?php echo htmlspecialchars($degree['duration']); ?></p>
+                                <?php endif; ?>
+                                <?php if (!empty($degree['medium'])): ?>
+                                    <p><strong>Medium:</strong> <?php echo htmlspecialchars($degree['medium']); ?></p>
+                                <?php endif; ?>
+                                <?php if (!empty($degree['description'])): ?>
+                                    <p><?php echo htmlspecialchars($degree['description']); ?></p>
+                                <?php endif; ?>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         <?php else: ?>
             <p class="section-subtitle">No cataloged degrees are visible right now. Check back soon.</p>
         <?php endif; ?>
