@@ -6,10 +6,14 @@ $conn->query("SET FOREIGN_KEY_CHECKS = 0;");
 
 // Update degrees table to include specific fields if necessary or map using zscore_cutoffs.
 // Best approach: Add columns to zscore_cutoffs
-$conn->query("ALTER TABLE zscore_cutoffs ADD COLUMN subject1 VARCHAR(100) DEFAULT NULL");
-$conn->query("ALTER TABLE zscore_cutoffs ADD COLUMN subject2 VARCHAR(100) DEFAULT NULL");
-$conn->query("ALTER TABLE zscore_cutoffs ADD COLUMN subject3 VARCHAR(100) DEFAULT NULL");
-$conn->query("ALTER TABLE zscore_cutoffs ADD COLUMN district VARCHAR(100) DEFAULT NULL");
+try {
+    $conn->query("ALTER TABLE zscore_cutoffs ADD COLUMN subject1 VARCHAR(100) DEFAULT NULL");
+    $conn->query("ALTER TABLE zscore_cutoffs ADD COLUMN subject2 VARCHAR(100) DEFAULT NULL");
+    $conn->query("ALTER TABLE zscore_cutoffs ADD COLUMN subject3 VARCHAR(100) DEFAULT NULL");
+    $conn->query("ALTER TABLE zscore_cutoffs ADD COLUMN district VARCHAR(100) DEFAULT NULL");
+} catch (mysqli_sql_exception $e) {
+    // Columns might already exist, ignore duplicate column errors
+}
 
 // Clear existing to avoid duplicate issues on re-run (or just append, but we might truncate)
 $conn->query("TRUNCATE TABLE zscore_cutoffs");
@@ -62,7 +66,9 @@ $data = [
 ];
 
     // Clean up our dummy faculties and departments to fix previous mismatches
-    $conn->query("DELETE FROM zscore_cutoffs WHERE stream = 'Physical Science' AND description IS NULL"); // Hacky way to know the new cutoffs don't have description if we didn't add it, actually stream='Physical Science' is an indicator
+    try {
+        $conn->query("DELETE FROM zscore_cutoffs WHERE stream = 'Physical Science'"); 
+    } catch(Exception $e) {}
     $conn->query("TRUNCATE TABLE zscore_cutoffs"); // Just wipe to be safe
     // Note: We won't wipe degrees/universities to protect actual schema data but fix mappings
     
