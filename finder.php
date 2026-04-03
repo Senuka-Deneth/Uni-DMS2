@@ -129,6 +129,14 @@ include "includes/header.php";
     main .section-shell, main .section-shell h1, main .section-shell h3, main .section-shell p, main .section-shell label, main .section-shell input, main .section-shell select, main .section-shell option, main .section-shell .btn-ghost, main .section-shell .eyebrow {
         color: #000000 !important;
     }
+    main .section-shell input, main .section-shell select, main .section-shell option {
+        background-color: #ffffff !important;
+    }
+    main .finder-stage {
+        background: #ffffff !important;
+        border: 1px solid #eaeaea !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+    }
     main .btn-primary {
         box-shadow: none !important;
         text-shadow: none !important;

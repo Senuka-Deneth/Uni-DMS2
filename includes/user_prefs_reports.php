@@ -65,7 +65,7 @@ $degOverall = getTopDegreesData($conn, null, $totO);
     .reports-section {
         padding-top: 3rem;
         padding-bottom: 5rem;
-        background: var(--surface-light);
+        background: #ffffff !important;
     }
 
     .report-grid {
@@ -81,17 +81,15 @@ $degOverall = getTopDegreesData($conn, null, $totO);
         min-height: 100%;
         padding: var(--space-8);
         border-radius: var(--radius-xl);
-        border: 1px solid rgba(59, 130, 246, 0.18);
-        background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.96) 100%);
-        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(14px) saturate(130%);
-        -webkit-backdrop-filter: blur(14px) saturate(130%);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: #ffffff !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     }
 
     .report-card__title {
         margin: 0;
         font-size: clamp(1.2rem, 2vw, 1.45rem);
-        color: var(--text-on-dark-primary);
+        color: #000000 !important;
         display: flex;
         align-items: center;
         gap: var(--space-2);
@@ -100,7 +98,7 @@ $degOverall = getTopDegreesData($conn, null, $totO);
     .report-card__subtitle {
         margin: 0;
         font-size: var(--text-sm);
-        color: var(--text-on-dark-secondary);
+        color: #555555 !important;
     }
 
     .report-content {
@@ -120,7 +118,7 @@ $degOverall = getTopDegreesData($conn, null, $totO);
     .report-title {
         font-size: 0.95rem;
         font-weight: 600;
-        color: var(--text-on-dark-primary);
+        color: #000000 !important;
         margin-bottom: 0.5rem;
         white-space: nowrap;
         overflow: hidden;
@@ -128,7 +126,7 @@ $degOverall = getTopDegreesData($conn, null, $totO);
     }
 
     .report-title span {
-        color: var(--text-on-dark-secondary);
+        color: #555555 !important;
         font-weight: 400;
     }
 
@@ -144,7 +142,7 @@ $degOverall = getTopDegreesData($conn, null, $totO);
 
     .report-bar-wrap {
         flex: 1;
-        background: rgba(148, 163, 184, 0.18);
+        background: #e9ecef;
         height: 10px;
         border-radius: 6px;
         overflow: hidden;
@@ -173,20 +171,20 @@ $degOverall = getTopDegreesData($conn, null, $totO);
         font-size: 0.8rem;
         text-align: right;
         font-weight: bold;
-        color: var(--text-on-dark-primary);
+        color: #000000 !important;
     }
 
     .report-gender-lbl {
         width: 36px;
         font-size: 0.75rem;
-        color: var(--text-on-dark-secondary);
+        color: #555555 !important;
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 
     .report-empty {
         margin: 0;
-        color: var(--text-on-dark-secondary);
+        color: #555555 !important;
     }
 
     @media (max-width: 768px) {
