@@ -1,0 +1,37 @@
+[33m4756610[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: pull: Fast-forward
+[33m115bc9d[m HEAD@{1}: commit: fix: remove unused brand mark from floating navbar for cleaner design
+[33m4313bfb[m HEAD@{2}: commit: refactor: streamline data handling and improve report structure in user preferences
+[33m7f70602[m HEAD@{3}: commit: feat: add reports page and update navigation links
+[33m09d0d0a[m HEAD@{4}: commit: Refactor code structure for improved readability and maintainability
+[33mda517c6[m HEAD@{5}: commit: fix: adjust page-hero min-height and padding for improved layout consistency
+[33m6f01b5c[m HEAD@{6}: commit: fix: update headings for highest demanded degrees to improve clarity
+[33m4c80cb1[m HEAD@{7}: pull: Fast-forward
+[33mfea86ab[m HEAD@{8}: commit: Refactor user preference reports layout and update chart dimensions for better visibility
+[33m5e518c9[m HEAD@{9}: commit: Add user preferences functionality and analytics
+[33m9bfc829[m HEAD@{10}: commit: Add student preference insights and reporting features
+[33mbb4139d[m HEAD@{11}: commit: enhance degree search functionality
+[33mf437d98[m HEAD@{12}: commit: Add curriculum links and update degree details for universities
+[33m442c7e4[m HEAD@{13}: pull: Fast-forward
+[33m86745ef[m HEAD@{14}: commit: Implement feature X to enhance user experience and fix bug Y in module Z
+[33m3be79f3[m HEAD@{15}: commit: Enhance degree display styles by bolding stream titles and normalizing degree names for improved readability
+[33m7e830e1[m HEAD@{16}: commit: Refactor university degree queries and add university_degrees table setup script
+[33m0d5294e[m HEAD@{17}: pull: Fast-forward
+[33m2d51a37[m HEAD@{18}: commit: Implement feature X to enhance user experience and optimize performance
+[33m1c4cd83[m HEAD@{19}: pull: Fast-forward
+[33md4b4d1a[m HEAD@{20}: commit: Disable automatic rotating placeholders in search input and update footer script for cache busting
+[33mfa330a2[m HEAD@{21}: commit: Enhance Z-Score Finder with degree name fetching and improved results layout
+[33mec24847[m HEAD@{22}: commit: Enhance results table for name search with dynamic district columns and improved layout
+[33m63a76d1[m HEAD@{23}: commit: Refactor code structure for improved readability and maintainability
+[33mb482fa4[m HEAD@{24}: pull: Fast-forward
+[33m72f4362[m HEAD@{25}: pull: Fast-forward
+[33m6c11b55[m HEAD@{26}: pull: Fast-forward
+[33m49baaaa[m[33m ([m[1;31mfriend/main[m[33m, [m[1;31mfriend/HEAD[m[33m)[m HEAD@{27}: checkout: moving from main to main
+[33m49baaaa[m[33m ([m[1;31mfriend/main[m[33m, [m[1;31mfriend/HEAD[m[33m)[m HEAD@{28}: pull: Fast-forward
+[33m28fcebc[m HEAD@{29}: commit: Refactor update_db_script.php to handle potential duplicate column errors and improve data cleanup process
+[33mdad5b82[m HEAD@{30}: pull: Fast-forward
+[33m4812981[m HEAD@{31}: commit: Refactor Z-Score Finder to support searching by degree name; enhance form layout and reset functionality
+[33m89b0b4b[m HEAD@{32}: commit: Refactor Z-Score Finder form and results section; improve reset functionality and update labels for clarity
+[33m8863917[m HEAD@{33}: commit (amend): Refactor Z-Score Finder functionality to include subject selection and district filtering; update database schema and seeding for new fields
+[33m25f1720[m HEAD@{34}: commit: Refactor Z-Score Finder functionality to include subject selection and district filtering; update database schema and seeding for new fields
+[33m37d5a03[m HEAD@{35}: pull: Fast-forward
+[33mad5ab7f[m HEAD@{36}: clone: from https://github.com/ARSPFdo-2004/Uni-DMS2.git

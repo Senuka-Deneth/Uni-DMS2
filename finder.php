@@ -2,7 +2,7 @@
 require_once "includes/db.php";
 require_once "includes/require_user_details.php";
 
-$pageTitle = "Find My Degree";
+$pageTitle = "Z-Score Finder";
 $pageStyles = ["css/pages/finder.css"];
 
 $degrees = [];
@@ -124,8 +124,8 @@ include "includes/header.php";
 ?>
 <section class="page-hero reveal-on-scroll" aria-label="Finder hero">
     <div class="container">
-        <p class="eyebrow">Find My Degree</p>
-        <h1>Find My Degree</h1>
+        <p class="eyebrow">Z-Score Finder</p>
+        <h1>Z-Score Degree Finder</h1>
         <p class="page-hero-meta">Match your A/L results to degrees according to your subject combination and district, or search by degree name directly.</p>
     </div>
 </section>
@@ -138,47 +138,46 @@ include "includes/header.php";
             </div>
         <?php endif; ?>
         
-        <div class="finder-forms-grid">
+        <div style="display:flex; gap: 32px; flex-wrap: wrap;">
             
             <!-- Z-Score Search Form -->
-            <form class="finder-stage reveal-on-scroll" method="POST" action="finder.php#results">
+            <form class="finder-stage reveal-on-scroll" method="POST" action="finder.php#results" style="flex:1; min-width: 300px;">
                 <input type="hidden" name="zscore_search" value="1">
-                <div class="finder-stage__header">
-                    <h3 class="finder-stage__title">Search by Z-Score &amp; Subjects</h3>
-                    <p class="finder-stage__description">Match your subject combination and district to find the degrees that fit your score.</p>
-                </div>
+                <h3 style="margin-bottom: 16px;">Search by Z-Score & Subjects</h3>
                 
-                <div class="form-field">
-                    <label>Subject 1</label>
-                    <select name="subject1" class="form-input" required>
-                        <option value="">Select Subject 1</option>
-                        <?php foreach($subjects as $s): ?>
-                            <option value="<?php echo $s; ?>" <?php echo $sub1===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-field">
-                    <label>Subject 2</label>
-                    <select name="subject2" class="form-input" required>
-                        <option value="">Select Subject 2</option>
-                        <?php foreach($subjects as $s): ?>
-                            <option value="<?php echo $s; ?>" <?php echo $sub2===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-field">
-                    <label>Subject 3</label>
-                    <select name="subject3" class="form-input" required>
-                        <option value="">Select Subject 3</option>
-                        <?php foreach($subjects as $s): ?>
-                            <option value="<?php echo $s; ?>" <?php echo $sub3===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                <div style="display:flex; gap:16px; margin: 16px 0; flex-direction: column;">
+                    <div class="form-field" style="flex:1;">
+                        <label>Subject 1</label>
+                        <select name="subject1" required style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                            <option value="">Select Subject 1</option>
+                            <?php foreach($subjects as $s): ?>
+                                <option value="<?php echo $s; ?>" <?php echo $sub1===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-field" style="flex:1;">
+                        <label>Subject 2</label>
+                        <select name="subject2" required style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                            <option value="">Select Subject 2</option>
+                            <?php foreach($subjects as $s): ?>
+                                <option value="<?php echo $s; ?>" <?php echo $sub2===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-field" style="flex:1;">
+                        <label>Subject 3</label>
+                        <select name="subject3" required style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                            <option value="">Select Subject 3</option>
+                            <?php foreach($subjects as $s): ?>
+                                <option value="<?php echo $s; ?>" <?php echo $sub3===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-field">
+                <div class="form-field" style="margin-bottom:16px;">
                     <label>District</label>
-                    <select name="district" class="form-input" required>
+                    <select name="district" required style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
                         <option value="">Select District</option>
                         <?php foreach($districts as $d): ?>
                             <option value="<?php echo $d; ?>" <?php echo $district===$d ? "selected" : ""; ?>><?php echo $d; ?></option>
@@ -190,7 +189,7 @@ include "includes/header.php";
                     <label for="zscoreRange">Your Z-Score</label>
                     <div style="display:flex; align-items:center; gap:16px;">
                         <input type="range" class="range-slider" id="zscoreRange" min="0" max="4" step="0.001" value="<?php echo htmlspecialchars($sliderValueFormatted); ?>" style="flex:1;">
-                        <input type="number" id="zscoreInput" name="zscore" min="0" max="4" step="0.001" class="form-input" value="<?php echo htmlspecialchars($sliderValueFormatted); ?>" style="width:100px;" required>
+                        <input type="number" id="zscoreInput" name="zscore" min="0" max="4" step="0.001" value="<?php echo htmlspecialchars($sliderValueFormatted); ?>" style="width:100px; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" required>
                     </div>
                 </div>
                 <!-- Remove the old hidden input and strong text logic, simply adding event listeners to sync them -->
@@ -216,16 +215,13 @@ include "includes/header.php";
             </form>
             
             <!-- Degree Name Search Form -->
-            <form class="finder-stage reveal-on-scroll" method="POST" action="finder.php#results">
+            <form class="finder-stage reveal-on-scroll" method="POST" action="finder.php#results" style="flex:1; min-width: 300px; height: fit-content;">
                 <input type="hidden" name="name_search" value="1">
-                <div class="finder-stage__header">
-                    <h3 class="finder-stage__title">Search Degree</h3>
-                    <p class="finder-stage__description">Look up a degree directly by name or narrow it down by university.</p>
-                </div>
+                <h3 style="margin-bottom: 16px;">Search Degree</h3>
                 
-                <div class="form-field">
+                <div class="form-field" style="margin-bottom: 16px;">
                     <label>Degree Name</label>
-                    <input type="text" id="searchInput" name="search_degree_name" list="degreeNameOptions" class="form-input" placeholder="Optional if university is selected" value="<?php echo htmlspecialchars($degreeSearchName); ?>">
+                    <input type="text" id="searchInput" name="search_degree_name" list="degreeNameOptions" placeholder="Optional if university is selected" value="<?php echo htmlspecialchars($degreeSearchName); ?>" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
                     <datalist id="degreeNameOptions">
                         <?php foreach($degreeNamesList as $dn): ?>
                             <option value="<?php echo htmlspecialchars($dn); ?>"></option>
@@ -233,9 +229,9 @@ include "includes/header.php";
                     </datalist>
                 </div>
                 
-                <div class="form-field">
+                <div class="form-field" style="margin-bottom: 16px;">
                     <label>University (Optional)</label>
-                    <select name="search_university" class="form-input">
+                    <select name="search_university" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
                         <option value="">All Universities</option>
                         <?php foreach($uniList as $uni): ?>
                             <option value="<?php echo htmlspecialchars($uni); ?>" <?php echo $searchUniversity === $uni ? "selected" : ""; ?>><?php echo htmlspecialchars($uni); ?></option>
@@ -258,7 +254,7 @@ include "includes/header.php";
         <?php if ($_SERVER["REQUEST_METHOD"] === "POST"): ?>
             <div class="finder-results">
                 <?php if ($degrees): ?>
-                    <div class="finder-results-scroll">
+                    <div style="overflow-x:auto;">
                         <?php if ($searchMode === 'name'): ?>
                             <?php foreach ($degrees as $index => $deg): ?>
                                 <?php
@@ -288,43 +284,43 @@ include "includes/header.php";
                                     }
                                 }
                                 ?>
-                                <div class="finder-result-window">
+                                <div style="margin-bottom: 48px; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-wrap: wrap;">
                                     
                                     <!-- Degree Details (Left side) -->
-                                    <div class="finder-result-main">
-                                        <h3 class="finder-result-title"><?php echo htmlspecialchars($deg["degree_name"]); ?></h3>
-                                        <p class="finder-result-university"><strong>University:</strong> <?php echo htmlspecialchars($deg["university_name"]); ?></p>
+                                    <div style="flex: 1; padding: 24px; min-width: 300px; border-right: 1px solid #eaeaea;">
+                                        <h3 style="margin-bottom: 16px; font-size: 1.5rem; color: #0056b3;"><?php echo htmlspecialchars($deg["degree_name"]); ?></h3>
+                                        <p style="font-size: 1.1rem; color: #555; margin-bottom: 24px;"><strong>University:</strong> <?php echo htmlspecialchars($deg["university_name"]); ?></p>
                                         
-                                        <div class="finder-result-meta-grid">
-                                            <div><strong>Duration:</strong> <br>4 years</div>
-                                            <div><strong>Medium:</strong> <br>English</div>
-                                            <div><strong>Subject Req 1:</strong> <br><?php echo !empty($deg["subject1"]) ? htmlspecialchars($deg["subject1"]) : "-"; ?></div>
-                                            <div><strong>Subject Req 2:</strong> <br><?php echo !empty($deg["subject2"]) ? htmlspecialchars($deg["subject2"]) : "-"; ?></div>
-                                            <div><strong>Subject Req 3:</strong> <br><?php echo !empty($deg["subject3"]) ? htmlspecialchars($deg["subject3"]) : "-"; ?></div>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                                            <div><strong style="color: #666;">Duration:</strong> <br>4 years</div>
+                                            <div><strong style="color: #666;">Medium:</strong> <br>English</div>
+                                            <div><strong style="color: #666;">Subject Req 1:</strong> <br><?php echo !empty($deg["subject1"]) ? htmlspecialchars($deg["subject1"]) : "-"; ?></div>
+                                            <div><strong style="color: #666;">Subject Req 2:</strong> <br><?php echo !empty($deg["subject2"]) ? htmlspecialchars($deg["subject2"]) : "-"; ?></div>
+                                            <div><strong style="color: #666;">Subject Req 3:</strong> <br><?php echo !empty($deg["subject3"]) ? htmlspecialchars($deg["subject3"]) : "-"; ?></div>
                                         </div>
                                         
                                         <?php if(!empty($deg["description"])): ?>
-                                            <div class="finder-result-description-box">
-                                                <strong>Description:</strong>
-                                                <p><?php echo htmlspecialchars($deg["description"]); ?></p>
+                                            <div style="background: #f8f9fa; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
+                                                <strong style="color: #666;">Description:</strong>
+                                                <p style="margin-top: 8px; color: #444; font-size: 0.95rem; line-height: 1.5;"><?php echo htmlspecialchars($deg["description"]); ?></p>
                                             </div>
                                         <?php endif; ?>
                                         
-                                        <div class="finder-result-actions">
-                                            <a class="btn btn-primary" href="<?php echo htmlspecialchars($curriculumLink); ?>" target="_blank" rel="noopener noreferrer">
-                                                <i class="fa-solid fa-book"></i> Curriculum
+                                        <div style="margin-top: auto;">
+                                            <a href="<?php echo htmlspecialchars($curriculumLink); ?>" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 20px; background: #0056b3; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                                                <i class="fa-solid fa-book" style="margin-right: 6px;"></i> Curriculum
                                             </a>
                                         </div>
                                     </div>
 
                                     <?php if (!empty(trim($degreeSearchName))): ?>
                                     <!-- Cutoffs Table (Right side vertical) -->
-                                    <div class="finder-cutoff-pane">
-                                        <table class="finder-cutoff-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>District</th>
-                                                    <th>Z-Score Cutoff</th>
+                                    <div style="flex: 1; min-width: 300px; max-height: 480px; overflow-y: auto;">
+                                        <table style="width:100%; border-collapse: collapse; text-align: left;">
+                                            <thead style="background: #f8f9fa; position: sticky; top: 0; z-index: 10;">
+                                                <tr style="border-bottom: 2px solid #eaeaea;">
+                                                    <th style="padding: 16px;">District</th>
+                                                    <th style="padding: 16px;">Z-Score Cutoff</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -336,13 +332,13 @@ include "includes/header.php";
                                                     $dName = ucwords(str_replace('_', ' ', $dc));
                                                     $val = $deg[$dc] ?? null;
                                                 ?>
-                                                    <tr>
-                                                        <td><?php echo htmlspecialchars($dName); ?></td>
-                                                        <td>
+                                                    <tr style="border-bottom: 1px solid #f1f1f1;">
+                                                        <td style="padding: 12px 16px; color: #333; font-weight: 500;"><?php echo htmlspecialchars($dName); ?></td>
+                                                        <td style="padding: 12px 16px;">
                                                             <?php if($val !== null): ?>
-                                                                <span class="finder-cutoff-badge"><?php echo htmlspecialchars($val); ?></span>
+                                                                <span style="background: #e9ecef; padding: 4px 8px; border-radius: 4px; font-weight: bold; color: #0056b3;"><?php echo htmlspecialchars($val); ?></span>
                                                             <?php else: ?>
-                                                                <span class="finder-cutoff-empty">-</span>
+                                                                <span style="color: #aaa;">-</span>
                                                             <?php endif; ?>
                                                         </td>
                                                     </tr>
@@ -354,15 +350,15 @@ include "includes/header.php";
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <table class="finder-results-table">
-                                <thead>
-                                    <tr>
-                                        <th>Degree</th>
-                                        <th>University</th>
-                                        <th>Duration</th>
-                                        <th>Medium</th>
-                                        <th>Z-Score Cutoff</th>
-                                        <th>Actions</th>
+                            <table style="width:100%; border-collapse: collapse; margin-bottom: 32px; text-align: left; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden;">
+                                <thead style="background: #f8f9fa;">
+                                    <tr style="border-bottom: 2px solid #eaeaea;">
+                                        <th style="padding: 16px;">Degree</th>
+                                        <th style="padding: 16px;">University</th>
+                                        <th style="padding: 16px;">Duration</th>
+                                        <th style="padding: 16px;">Medium</th>
+                                        <th style="padding: 16px;">Z-Score Cutoff</th>
+                                        <th style="padding: 16px;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -394,50 +390,50 @@ include "includes/header.php";
                                         }
                                     }
                                     ?>
-                                    <tr id="row-<?php echo $index; ?>" class="finder-results-row">
-                                        <td><?php echo htmlspecialchars($deg["degree_name"]); ?></td>
-                                        <td><?php echo htmlspecialchars($deg["university_name"]); ?></td>
-                                        <td>4 years</td>
-                                        <td>English</td>
-                                        <td>
+                                    <tr id="row-<?php echo $index; ?>" style="border-bottom: 1px solid #f1f1f1; transition: background 0.2s;">
+                                        <td style="padding: 16px; color: #333; font-weight: 500;"><?php echo htmlspecialchars($deg["degree_name"]); ?></td>
+                                        <td style="padding: 16px; color: #555;"><?php echo htmlspecialchars($deg["university_name"]); ?></td>
+                                        <td style="padding: 16px; color: #555;">4 years</td>
+                                        <td style="padding: 16px; color: #555;">English</td>
+                                        <td style="padding: 16px; color: #555;">
                                             <?php if(isset($deg["cutoff"]) && $deg["cutoff"] !== null): ?>
-                                                <span class="finder-cutoff-badge"><?php echo htmlspecialchars($deg["cutoff"]); ?></span>
+                                                <span style="background: #e9ecef; padding: 4px 8px; border-radius: 4px; font-weight: bold;"><?php echo htmlspecialchars($deg["cutoff"]); ?></span>
                                             <?php else: ?>
                                                 N/A
                                             <?php endif; ?>
                                         </td>
-                                        <td>
-                                            <button type="button" class="btn btn-ghost finder-detail-toggle" onclick="showDegreeDetails(<?php echo $index; ?>)">View Details</button>
+                                        <td style="padding: 16px;">
+                                            <button type="button" class="btn btn-ghost" onclick="showDegreeDetails(<?php echo $index; ?>)" style="padding: 8px 16px; font-size: 0.9em;">View Details</button>
                                         </td>
                                     </tr>
-                                    <tr id="detail-row-<?php echo $index; ?>" class="finder-detail-row" style="display: none;">
-                                        <td colspan="6">
-                                            <fieldset class="finder-detail-panel">
-                                                <legend>Degree Details</legend>
-                                                <h3><?php echo htmlspecialchars($deg["degree_name"]); ?></h3>
+                                    <tr id="detail-row-<?php echo $index; ?>" style="display: none; background: #fafafa;">
+                                        <td colspan="4" style="padding: 16px;">
+                                            <fieldset style="border: 1px solid #ddd; padding: 24px; border-radius: 8px; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                                                <legend style="padding: 0 12px; font-weight: bold; font-size: 1.1rem; color: #0056b3;">Degree Details</legend>
+                                                <h3 style="margin-bottom: 16px; font-size: 1.5rem; color: #333;"><?php echo htmlspecialchars($deg["degree_name"]); ?></h3>
                                                 
-                                                <div class="finder-detail-grid">
-                                                    <div><strong>University:</strong> <br><?php echo htmlspecialchars($deg["university_name"]); ?></div>
+                                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px;">
+                                                    <div><strong style="color: #666;">University:</strong> <br><?php echo htmlspecialchars($deg["university_name"]); ?></div>
                                                     <?php if(isset($deg["cutoff"]) && $deg["cutoff"] !== null): ?>
-                                                        <div><strong>Cutoff:</strong> <br><?php echo htmlspecialchars($deg["cutoff"]); ?></div>
+                                                        <div><strong style="color: #666;">Cutoff:</strong> <br><?php echo htmlspecialchars($deg["cutoff"]); ?></div>
                                                     <?php endif; ?>
-                                                    <div><strong>Duration:</strong> <br>4 years</div>
-                                                    <div><strong>Medium:</strong> <br>English</div>
+                                                    <div><strong style="color: #666;">Duration:</strong> <br>4 years</div>
+                                                    <div><strong style="color: #666;">Medium:</strong> <br>English</div>
                                                 </div>
                                                 
                                                 <?php if(!empty($deg["description"])): ?>
-                                                    <div class="finder-result-description-box">
-                                                        <strong>Description:</strong>
-                                                        <p><?php echo htmlspecialchars($deg["description"]); ?></p>
+                                                    <div style="margin-bottom: 24px; background: #f8f9fa; padding: 16px; border-radius: 6px;">
+                                                        <strong style="color: #666;">Description:</strong>
+                                                        <p style="margin-top: 8px; color: #444;"><?php echo htmlspecialchars($deg["description"]); ?></p>
                                                     </div>
                                                 <?php endif; ?>
                                                 
-                                                <div class="finder-result-actions finder-detail-actions">
+                                                <div style="display: flex; gap: 16px; align-items: center; border-top: 1px solid #eaeaea; padding-top: 16px;">
                                                     <?php if (!empty($deg["university_id"])): ?>
                                                         <a class="btn btn-primary" href="university.php?id=<?php echo $deg["university_id"]; ?>">Go to University Page &rarr;</a>
                                                     <?php endif; ?>
-                                                    <a class="btn btn-primary" href="<?php echo htmlspecialchars($curriculumLink); ?>" target="_blank" rel="noopener noreferrer">
-                                                        <i class="fa-solid fa-book"></i> Curriculum
+                                                    <a href="<?php echo htmlspecialchars($curriculumLink); ?>" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 20px; background: #0056b3; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                                                        <i class="fa-solid fa-book" style="margin-right: 6px;"></i> Curriculum
                                                     </a>
                                                 </div>
                                             </fieldset>
@@ -463,75 +459,35 @@ include "includes/header.php";
 </section>
 
 <script>
-const DETAIL_ANIMATION_MS = 220;
-
-function closeDetailRow(detailRow, mainRow) {
-    if (!detailRow) {
-        return;
-    }
-
-    detailRow.classList.remove('is-open');
-    if (mainRow) {
-        mainRow.classList.remove('is-active');
-    }
-
-    if (detailRow.hideTimer) {
-        window.clearTimeout(detailRow.hideTimer);
-    }
-
-    detailRow.hideTimer = window.setTimeout(() => {
-        detailRow.style.display = 'none';
-    }, DETAIL_ANIMATION_MS);
-}
-
-function openDetailRow(detailRow, mainRow) {
-    if (!detailRow) {
-        return;
-    }
-
-    if (detailRow.hideTimer) {
-        window.clearTimeout(detailRow.hideTimer);
-    }
-
-    detailRow.style.display = 'table-row';
-    window.requestAnimationFrame(() => {
-        detailRow.classList.add('is-open');
-    });
-
-    if (mainRow) {
-        mainRow.classList.add('is-active');
-    }
-}
-
 function showDegreeDetails(index) {
     const detailRow = document.getElementById('detail-row-' + index);
     const mainRow = document.getElementById('row-' + index);
-    const isVisible = detailRow && detailRow.style.display !== 'none';
-    const isOpen = detailRow && detailRow.classList.contains('is-open');
     
     // If it's already shown, just hide it
-    if (isVisible && isOpen) {
-        closeDetailRow(detailRow, mainRow);
+    if (detailRow && detailRow.style.display !== 'none') {
+        detailRow.style.display = 'none';
+        if (mainRow) mainRow.style.backgroundColor = 'transparent';
         return;
     }
 
     // Hide all detail rows first
     const allDetailRows = document.querySelectorAll('tr[id^="detail-row-"]');
     allDetailRows.forEach(el => {
-        const rowId = el.id.replace('detail-row-', '');
-        const pairedMainRow = document.getElementById('row-' + rowId);
-        closeDetailRow(el, pairedMainRow);
+        el.style.display = 'none';
     });
 
     // Reset table row highlights
     const allRows = document.querySelectorAll('tr[id^="row-"]');
     allRows.forEach(el => {
-        el.classList.remove('is-active');
+        el.style.backgroundColor = 'transparent';
     });
 
     // Show specific detail row and highlight main row
     if (detailRow) {
-        openDetailRow(detailRow, mainRow);
+        detailRow.style.display = 'table-row';
+        if (mainRow) {
+            mainRow.style.backgroundColor = '#eef5ff'; // subtle highlight
+        }
     }
 }
 
