@@ -143,7 +143,10 @@ include "includes/header.php";
             <!-- Z-Score Search Form -->
             <form class="finder-stage reveal-on-scroll" method="POST" action="finder.php#results">
                 <input type="hidden" name="zscore_search" value="1">
-                <h3 style="margin-bottom: 16px;">Search by Z-Score & Subjects</h3>
+                <div class="finder-stage__header">
+                    <h3 class="finder-stage__title">Search by Z-Score &amp; Subjects</h3>
+                    <p class="finder-stage__description">Match your subject combination and district to find the degrees that fit your score.</p>
+                </div>
                 
                 <div class="form-field">
                     <label>Subject 1</label>
@@ -215,7 +218,10 @@ include "includes/header.php";
             <!-- Degree Name Search Form -->
             <form class="finder-stage reveal-on-scroll" method="POST" action="finder.php#results">
                 <input type="hidden" name="name_search" value="1">
-                <h3 style="margin-bottom: 16px;">Search Degree</h3>
+                <div class="finder-stage__header">
+                    <h3 class="finder-stage__title">Search Degree</h3>
+                    <p class="finder-stage__description">Look up a degree directly by name or narrow it down by university.</p>
+                </div>
                 
                 <div class="form-field">
                     <label>Degree Name</label>
