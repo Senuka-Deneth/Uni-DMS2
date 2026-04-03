@@ -50,7 +50,7 @@ if ($gallery_files) {
 }
 ?>
 
-<section class="page-hero reveal-on-scroll" aria-label="Gallery hero">
+<section class="page-hero reveal-on-scroll" aria-label="Gallery hero" style="background-color: var(--dark-950) !important;">
   <div class="container">
     <p class="eyebrow">Gallery</p>
     <h1>Moments from Campus Life</h1>
