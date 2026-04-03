@@ -1,11 +1,11 @@
 /* Color, spacing, radius, and shadow tokens for the premium system */
 :root {
-    /* Dark Layer */
-    --dark-950: #080C14;
-    --dark-900: #0D1117;
-    --dark-800: #111827;
-    --dark-700: #1A2233;
-    --dark-600: #243047;
+    /* Dark Layer - Deeper for Blue Neon */
+    --dark-950: #020617;
+    --dark-900: #0F172A;
+    --dark-800: #1E293B;
+    --dark-700: #334155;
+    --dark-600: #475569;
 
     /* Light Layer */
     --light-50: #F8F9FC;
@@ -14,13 +14,15 @@
     --light-300: #CBD2E1;
     --light-400: #94A3B8;
 
-    /* Brand & Accents */
-    --accent-600: #4F46E5;
-    --accent-500: #6366F1;
-    --accent-400: #818CF8;
-    --accent-300: #A5B4FC;
-    --accent-glow: rgba(99, 102, 241, 0.15);
-    --accent-glow-strong: rgba(99, 102, 241, 0.25);
+    /* Brand & Accents - Neon Blue Focus */
+    --accent-600: #2563EB;
+    --accent-500: #3B82F6;
+    --accent-400: #60A5FA;
+    --accent-300: #93C5FD;
+    --accent-glow: rgba(59, 130, 246, 0.2);
+    --accent-glow-strong: rgba(59, 130, 246, 0.4);
+    --neon-blue: #00D1FF;
+    --neon-glow: 0 0 15px rgba(0, 209, 255, 0.5);
 
     --emerald-500: #10B981;
     --emerald-400: #34D399;
@@ -30,10 +32,10 @@
     --amber-400: #FCD34D;
     --amber-glow: rgba(245, 158, 11, 0.12);
 
-    /* Text Colors */
-    --text-on-dark-primary: #F1F5F9;
-    --text-on-dark-secondary: #94A3B8;
-    --text-on-dark-muted: #4A5568;
+    /* Text Colors - Brighter for Dark Backgrounds */
+    --text-on-dark-primary: #F8FAFC;
+    --text-on-dark-secondary: #CBD5E1;
+    --text-on-dark-muted: #64748B;
     --text-on-light-primary: #0F172A;
     --text-on-light-secondary: #475569;
     --text-on-light-muted: #94A3B8;
@@ -77,8 +79,8 @@
     --shadow-accent-sm: 0 0 0 1px rgba(99, 102, 241, 0.2), 0 2px 8px rgba(99, 102, 241, 0.15);
 
     /* Elevation Colors */
-    --surface-dark: var(--dark-800);
-    --surface-light: var(--light-50);
+    --surface-dark: var(--dark-900);
+    --surface-light: var(--dark-800); /* Inverting surface light to be dark */
 
     /* Transition */
     --ease-default: cubic-bezier(0.4, 0, 0.2, 1);

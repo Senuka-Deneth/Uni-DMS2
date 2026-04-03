@@ -1,12 +1,12 @@
 /* Layout primitives and section styles */
 body {
-    background: var(--light-50);
-    color: var(--text-on-light-primary);
+    background: var(--dark-950);
+    color: var(--text-on-dark-primary);
 }
 
 .site-shell {
     position: relative;
-    background: var(--light-50);
+    background: var(--dark-950);
     min-height: 100vh;
 }
 
@@ -33,6 +33,24 @@ body {
     align-items: flex-start;
     padding: clamp(120px, 12vw, 160px) var(--page-padding) clamp(24px, 4vw, 40px);
     overflow: hidden;
+    isolation: isolate;
+}
+
+.home-hero::before,
+.about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(to bottom, rgba(2, 6, 23, 0.7) 0%, rgba(2, 6, 23, 0.9) 100%),
+        url('../images/hero/graduation_hats.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.22;
+    z-index: -1;
+    pointer-events: none;
+    animation: heroBackgroundZoom 20s ease-in-out infinite alternate;
 }
 
 .page-hero .container {
@@ -55,7 +73,7 @@ body {
 
 .page-transition {
     height: 120px;
-    background: linear-gradient(180deg, var(--dark-900), var(--light-50));
+    background: linear-gradient(180deg, var(--dark-900), var(--dark-950));
 }
 
 .hero-scroll {
@@ -82,7 +100,7 @@ body {
     font-size: 1.25rem;
 }
 
-@media (max-width: var(--bp-md)) {
+@media (max-width: 768px) {
     .page-hero {
         min-height: auto;
         padding-bottom: var(--space-10);

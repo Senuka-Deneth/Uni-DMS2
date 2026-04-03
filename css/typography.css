@@ -15,7 +15,7 @@
 html {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     line-height: 1.65;
-    color: var(--text-on-light-primary);
+    color: var(--text-on-dark-primary);
     text-rendering: optimizeLegibility;
 }
 
@@ -38,7 +38,7 @@ h6 {
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.03em;
-    color: var(--text-on-light-primary);
+    color: var(--text-on-dark-primary);
 }
 
 h1 {
@@ -52,7 +52,7 @@ h2 {
 
 p {
     font-size: var(--text-base);
-    color: var(--text-on-light-secondary);
+    color: var(--text-on-dark-secondary);
     letter-spacing: -0.01em;
 }
 
@@ -68,7 +68,7 @@ p {
 .section-subtitle,
 .helper-text {
     font-size: var(--text-md);
-    color: var(--text-on-light-secondary);
+    color: var(--text-on-dark-secondary);
 }
 
 .sr-only {

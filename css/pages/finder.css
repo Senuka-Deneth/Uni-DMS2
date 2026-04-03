@@ -171,7 +171,7 @@
     font-weight: 600;
 }
 
-@media (max-width: var(--bp-md)) {
+@media (max-width: 768px) {
     .finder-stage {
         padding: var(--space-8);
     }
