@@ -171,8 +171,16 @@
     font-weight: 600;
 }
 
-@media (max-width: var(--bp-md)) {
+@media (max-width: 768px) {
     .finder-stage {
         padding: var(--space-8);
     }
+}
+
+/* Form visibility fixes */
+.finder-stage input,
+.finder-stage select,
+.finder-card input,
+.finder-card select {
+    color: var(--text-on-light-primary) !important;
 }

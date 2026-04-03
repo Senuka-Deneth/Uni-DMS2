@@ -145,39 +145,37 @@ include "includes/header.php";
                 <input type="hidden" name="zscore_search" value="1">
                 <h3 style="margin-bottom: 16px;">Search by Z-Score & Subjects</h3>
                 
-                <div style="display:flex; gap:16px; margin: 16px 0; flex-direction: column;">
-                    <div class="form-field" style="flex:1;">
-                        <label>Subject 1</label>
-                        <select name="subject1" required style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
-                            <option value="">Select Subject 1</option>
-                            <?php foreach($subjects as $s): ?>
-                                <option value="<?php echo $s; ?>" <?php echo $sub1===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-field" style="flex:1;">
-                        <label>Subject 2</label>
-                        <select name="subject2" required style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
-                            <option value="">Select Subject 2</option>
-                            <?php foreach($subjects as $s): ?>
-                                <option value="<?php echo $s; ?>" <?php echo $sub2===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-field" style="flex:1;">
-                        <label>Subject 3</label>
-                        <select name="subject3" required style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
-                            <option value="">Select Subject 3</option>
-                            <?php foreach($subjects as $s): ?>
-                                <option value="<?php echo $s; ?>" <?php echo $sub3===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
+                <div class="form-field">
+                    <label>Subject 1</label>
+                    <select name="subject1" class="form-input" required>
+                        <option value="">Select Subject 1</option>
+                        <?php foreach($subjects as $s): ?>
+                            <option value="<?php echo $s; ?>" <?php echo $sub1===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label>Subject 2</label>
+                    <select name="subject2" class="form-input" required>
+                        <option value="">Select Subject 2</option>
+                        <?php foreach($subjects as $s): ?>
+                            <option value="<?php echo $s; ?>" <?php echo $sub2===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label>Subject 3</label>
+                    <select name="subject3" class="form-input" required>
+                        <option value="">Select Subject 3</option>
+                        <?php foreach($subjects as $s): ?>
+                            <option value="<?php echo $s; ?>" <?php echo $sub3===$s ? "selected" : ""; ?>><?php echo $s; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
-                <div class="form-field" style="margin-bottom:16px;">
+                <div class="form-field">
                     <label>District</label>
-                    <select name="district" required style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                    <select name="district" class="form-input" required>
                         <option value="">Select District</option>
                         <?php foreach($districts as $d): ?>
                             <option value="<?php echo $d; ?>" <?php echo $district===$d ? "selected" : ""; ?>><?php echo $d; ?></option>
@@ -189,7 +187,7 @@ include "includes/header.php";
                     <label for="zscoreRange">Your Z-Score</label>
                     <div style="display:flex; align-items:center; gap:16px;">
                         <input type="range" class="range-slider" id="zscoreRange" min="0" max="4" step="0.001" value="<?php echo htmlspecialchars($sliderValueFormatted); ?>" style="flex:1;">
-                        <input type="number" id="zscoreInput" name="zscore" min="0" max="4" step="0.001" value="<?php echo htmlspecialchars($sliderValueFormatted); ?>" style="width:100px; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" required>
+                        <input type="number" id="zscoreInput" name="zscore" min="0" max="4" step="0.001" class="form-input" value="<?php echo htmlspecialchars($sliderValueFormatted); ?>" style="width:100px;" required>
                     </div>
                 </div>
                 <!-- Remove the old hidden input and strong text logic, simply adding event listeners to sync them -->
@@ -219,9 +217,9 @@ include "includes/header.php";
                 <input type="hidden" name="name_search" value="1">
                 <h3 style="margin-bottom: 16px;">Search Degree</h3>
                 
-                <div class="form-field" style="margin-bottom: 16px;">
+                <div class="form-field">
                     <label>Degree Name</label>
-                    <input type="text" id="searchInput" name="search_degree_name" list="degreeNameOptions" placeholder="Optional if university is selected" value="<?php echo htmlspecialchars($degreeSearchName); ?>" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                    <input type="text" id="searchInput" name="search_degree_name" list="degreeNameOptions" class="form-input" placeholder="Optional if university is selected" value="<?php echo htmlspecialchars($degreeSearchName); ?>">
                     <datalist id="degreeNameOptions">
                         <?php foreach($degreeNamesList as $dn): ?>
                             <option value="<?php echo htmlspecialchars($dn); ?>"></option>
@@ -229,9 +227,9 @@ include "includes/header.php";
                     </datalist>
                 </div>
                 
-                <div class="form-field" style="margin-bottom: 16px;">
+                <div class="form-field">
                     <label>University (Optional)</label>
-                    <select name="search_university" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                    <select name="search_university" class="form-input">
                         <option value="">All Universities</option>
                         <?php foreach($uniList as $uni): ?>
                             <option value="<?php echo htmlspecialchars($uni); ?>" <?php echo $searchUniversity === $uni ? "selected" : ""; ?>><?php echo htmlspecialchars($uni); ?></option>
